@@ -1,0 +1,80 @@
+<!--pages/admin/rules/rules.wxml-->
+<view class="rules-container">
+  <view class="card">
+    <view class="card-title">{{editingId ? '编辑规则' : '创建规则'}}</view>
+    <view class="form-item">
+      <text class="label">规则名称*</text>
+      <input class="input" placeholder="如 全局默认规则" data-field="rule_name" bindinput="onInput" value="{{form.rule_name}}" />
+    </view>
+    <view class="form-item">
+      <text class="label">适用设施（可选）</text>
+      <picker mode="selector" range="{{facilityOptions}}" value="{{facilityIndex}}" bindchange="onFacilityChange">
+        <view class="picker">{{selectedFacilityName}}</view>
+      </picker>
+    </view>
+    <view class="form-row">
+      <view class="form-item half">
+        <text class="label">最多提前天数</text>
+        <input class="input" type="number" data-field="max_advance_days" bindinput="onNumberInput" value="{{form.max_advance_days}}" />
+      </view>
+      <view class="form-item half">
+        <text class="label">每日次数</text>
+        <input class="input" type="number" data-field="daily_limit" bindinput="onNumberInput" value="{{form.daily_limit}}" />
+      </view>
+    </view>
+    <view class="form-row">
+      <view class="form-item half">
+        <text class="label">最小时长(分钟)</text>
+        <input class="input" type="number" data-field="min_duration" bindinput="onNumberInput" value="{{form.min_duration}}" />
+      </view>
+      <view class="form-item half">
+        <text class="label">最大时长(分钟)</text>
+        <input class="input" type="number" data-field="max_duration" bindinput="onNumberInput" value="{{form.max_duration}}" />
+      </view>
+    </view>
+    <view class="form-row">
+      <view class="form-item half">
+        <text class="label">开始时间</text>
+        <input class="input" placeholder="HH:MM" data-field="start_time" bindinput="onInput" value="{{form.start_time}}" />
+      </view>
+      <view class="form-item half">
+        <text class="label">结束时间</text>
+        <input class="input" placeholder="HH:MM" data-field="end_time" bindinput="onInput" value="{{form.end_time}}" />
+      </view>
+    </view>
+    <view class="form-item">
+      <text class="label">状态</text>
+      <picker mode="selector" range="{{['启用', '停用']}}" value="{{form.status === 1 ? 0 : 1}}" bindchange="onStatusChange">
+        <view class="picker">{{form.status === 1 ? '启用' : '停用'}}</view>
+      </picker>
+    </view>
+    <view class="actions">
+      <button class="btn primary" bindtap="submitRule">{{editingId ? '保存修改' : '创建规则'}}</button>
+      <button class="btn plain" wx:if="{{editingId}}" bindtap="resetForm">取消编辑</button>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">规则列表</view>
+    <view class="rule-list">
+      <view class="rule-row" wx:for="{{rules}}" wx:key="rule_id">
+        <view class="rule-main">
+          <view class="rule-name">{{item.rule_name}}</view>
+          <view class="rule-meta">
+            <text class="tag">{{item.facility_name}}</text>
+            <text class="tag">提前 {{item.max_advance_days}} 天</text>
+            <text class="tag">{{item.min_duration}}-{{item.max_duration}} 分钟</text>
+            <text class="status {{item.status === 1 ? 'active' : 'disabled'}}">{{item.status === 1 ? '启用' : '禁用'}}</text>
+          </view>
+          <view class="rule-time">可预约：{{item.start_time}} - {{item.end_time}} / 每日 {{item.daily_limit}} 次</view>
+        </view>
+        <view class="rule-actions">
+          <button class="btn plain" size="mini" data-id="{{item.rule_id}}" bindtap="editRule">编辑</button>
+          <button class="btn danger" size="mini" data-id="{{item.rule_id}}" bindtap="deleteRule">删除</button>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{rules.length === 0 && !loading}}">暂无规则</view>
+    </view>
+  </view>
+</view>
+

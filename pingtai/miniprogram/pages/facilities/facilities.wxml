@@ -1,0 +1,112 @@
+<!--pages/facilities/facilities.wxml-->
+<custom-tabbar active="{{1}}" tabs="{{tabBarConfig}}" bind:change="onTabChange"></custom-tabbar>
+<view class="facilities-container">
+  <!-- 搜索和筛选 -->
+  <view class="search-section">
+    <view class="search-box">
+      <input 
+        class="search-input" 
+        type="text" 
+        placeholder="搜索设施名称" 
+        value="{{keyword}}"
+        bindinput="onKeywordInput"
+        bindconfirm="handleSearch"
+      />
+      <view class="search-btn" bindtap="handleSearch">🔍</view>
+    </view>
+    
+    <scroll-view class="category-scroll" scroll-x>
+      <view class="category-list">
+        <view 
+          class="category-item {{activeCategory === '' ? 'active' : ''}}" 
+          bindtap="onCategoryChange"
+          data-category=""
+        >
+          全部
+        </view>
+        <view 
+          class="category-item {{activeCategory === item ? 'active' : ''}}" 
+          wx:for="{{categories}}" 
+          wx:key="*this"
+          bindtap="onCategoryChange"
+          data-category="{{item}}"
+        >
+          {{item}}
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 设施列表 -->
+  <view class="facility-list">
+    <view 
+      class="facility-card" 
+      wx:for="{{facilities}}" 
+      wx:key="facility_id"
+      bindtap="goToDetail"
+      data-id="{{item.facility_id}}"
+    >
+      <view class="facility-image">
+        <image wx:if="{{item.image_url}}" src="{{item.image_url}}" mode="aspectFill" />
+        <view wx:else class="facility-image-placeholder">
+          <text>{{item.category}}</text>
+        </view>
+      </view>
+      <view class="facility-info">
+        <view class="facility-header">
+          <text class="facility-name">{{item.name}}</text>
+          <view class="facility-actions">
+            <!-- 已登录用户显示真实收藏状态 -->
+            <text 
+              wx:if="{{isLoggedIn}}"
+              class="favorite-icon {{item.is_favorite ? 'active' : ''}}"
+              catchtap="toggleFavorite"
+              data-id="{{item.facility_id}}"
+              data-index="{{index}}"
+            >
+              {{item.is_favorite ? '★' : '☆'}}
+            </text>
+            <!-- 未登录用户显示灰色星星 -->
+            <text 
+              wx:else
+              class="favorite-icon favorite-icon-disabled"
+              catchtap="toggleFavorite"
+              data-id="{{item.facility_id}}"
+              data-index="{{index}}"
+            >
+              ☆
+            </text>
+            <text class="facility-status {{item.status === 1 ? 'available' : 'unavailable'}}">
+              {{item.status === 1 ? '可预约' : '已停用'}}
+            </text>
+          </view>
+        </view>
+        <text class="facility-desc">{{item.description}}</text>
+        <view class="facility-footer">
+          <text class="facility-location">📍 {{item.location}}</text>
+          <view class="facility-meta">
+            <text class="tag tag-info">{{item.category}}</text>
+            <text class="facility-fav">⭐ 收藏 {{item.favorite_count || 0}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{facilities.length === 0 && !loading}}">
+    <text class="empty-icon">📭</text>
+    <text class="empty-text">暂无设施</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore && !loading}}" bindtap="loadMore">
+    <text>加载更多</text>
+  </view>
+</view>
+

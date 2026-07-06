@@ -1,0 +1,230 @@
+/* pages/auditor/audited-list/audited-list.wxss */
+.audited-list-container {
+  padding: 20rpx;
+}
+
+/* 筛选区域 */
+.filter-section {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 24rpx;
+  overflow-x: auto;
+  padding-bottom: 10rpx;
+}
+
+.filter-btn {
+  padding: 12rpx 28rpx;
+  background-color: #ffffff;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  color: #666666;
+  white-space: nowrap;
+  border: 2rpx solid #e0e0e0;
+}
+
+.filter-btn.active {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border-color: #4CAF50;
+}
+
+/* 预约卡片 */
+.booking-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.status-tag {
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+}
+
+.tag-approved {
+  background-color: #e8f5e9;
+  color: #4CAF50;
+}
+
+.tag-rejected {
+  background-color: #ffebee;
+  color: #f44336;
+}
+
+.tag-completed {
+  background-color: #e3f2fd;
+  color: #2196f3;
+}
+
+.tag-cancelled {
+  background-color: #fff3e0;
+  color: #ff9800;
+}
+
+.booking-date {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.info-row .label {
+  font-size: 26rpx;
+  color: #999999;
+  width: 140rpx;
+  flex-shrink: 0;
+}
+
+.info-row .value {
+  font-size: 26rpx;
+  color: #333333;
+  flex: 1;
+  word-break: break-all;
+}
+
+/* 异常处理按钮 */
+.card-footer {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.exception-btns {
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-exception {
+  flex: 1;
+  padding: 16rpx;
+  font-size: 26rpx;
+  border-radius: 8rpx;
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-exception.cancel {
+  background-color: #ff9800;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 100rpx 0;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999999;
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: 30rpx;
+  color: #999999;
+  font-size: 28rpx;
+}
+
+/* 弹窗 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 24rpx 24rpx 0 0;
+  padding: 30rpx;
+  z-index: 101;
+}
+
+.modal-header {
+  font-size: 32rpx;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  margin-bottom: 20rpx;
+}
+
+.modal-body {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.form-item {
+  margin-bottom: 20rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #333333;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.form-textarea {
+  width: 100%;
+  height: 200rpx;
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.btn-cancel,
+.btn-confirm {
+  flex: 1;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  border: none;
+}
+
+.btn-cancel {
+  background-color: #f5f5f5;
+  color: #666666;
+}
+
+.btn-confirm {
+  background-color: #4CAF50;
+  color: #ffffff;
+}

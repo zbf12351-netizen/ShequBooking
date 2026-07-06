@@ -1,0 +1,77 @@
+<!--pages/booking/booking.wxml-->
+<view class="booking-container">
+  <view class="form-card">
+    <view class="form-item">
+      <view class="form-label">选择设施</view>
+      <picker mode="selector" range="{{facilities}}" range-key="name" value="{{facilityIndex}}" bindchange="onFacilityChange">
+        <view class="picker-value">
+          {{selectedFacility ? selectedFacility.name : '请选择设施'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">预约日期</view>
+      <picker mode="date" start="{{minDate}}" end="{{maxDate}}" value="{{bookingDate}}" bindchange="onDateChange">
+        <view class="picker-value">
+          {{bookingDate || '请选择日期'}}
+        </view>
+      </picker>
+    </view>
+
+    <!-- 智能推荐时间段 -->
+    <view class="recommend-section" wx:if="{{recommendedTimes.length > 0}}">
+      <view class="section-title">🎯 推荐时间段（基于贪心算法）</view>
+      <view class="time-list">
+        <view 
+          class="time-item {{selectedTime === item.start_time + '-' + item.end_time ? 'active' : ''}}"
+          wx:for="{{recommendedTimes}}" 
+          wx:key="index"
+          bindtap="selectRecommendedTime"
+          data-start="{{item.start_time}}"
+          data-end="{{item.end_time}}"
+        >
+          <text class="time-text">{{item.start_time}} - {{item.end_time}}</text>
+          <text class="time-score">推荐度 {{item.score}}</text>
+        </view>
+      </view>
+      <button class="btn-refresh" size="mini" bindtap="refreshRecommendations">刷新推荐</button>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">开始时间</view>
+      <picker mode="time" value="{{startTime}}" bindchange="onStartTimeChange">
+        <view class="picker-value">
+          {{startTime || '请选择开始时间'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">结束时间</view>
+      <picker mode="time" value="{{endTime}}" bindchange="onEndTimeChange">
+        <view class="picker-value">
+          {{endTime || '请选择结束时间'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">预约目的</view>
+      <textarea 
+        class="form-textarea" 
+        placeholder="请输入预约目的" 
+        value="{{purpose}}"
+        bindinput="onPurposeInput"
+        maxlength="200"
+      ></textarea>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button class="btn-save" bindtap="handleSave">保存草稿</button>
+    <button class="btn-submit" bindtap="handleSubmit">提交审核</button>
+  </view>
+</view>
+

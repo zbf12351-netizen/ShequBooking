@@ -1,0 +1,78 @@
+<!--pages/auditor/audited-list/audited-list.wxml-->
+<view class="audited-list-container">
+  <view class="filter-section">
+    <view class="filter-btn {{status === '' ? 'active' : ''}}" bindtap="filterByStatus" data-status="">全部</view>
+    <view class="filter-btn {{status === 'approved' ? 'active' : ''}}" bindtap="filterByStatus" data-status="approved">已通过</view>
+    <view class="filter-btn {{status === 'rejected' ? 'active' : ''}}" bindtap="filterByStatus" data-status="rejected">已拒绝</view>
+    <view class="filter-btn {{status === 'completed' ? 'active' : ''}}" bindtap="filterByStatus" data-status="completed">已完成</view>
+    <view class="filter-btn {{status === 'cancelled' ? 'active' : ''}}" bindtap="filterByStatus" data-status="cancelled">已取消</view>
+    <view class="filter-btn {{status === 'exception' ? 'active' : ''}}" bindtap="filterByStatus" data-status="exception">异常处理</view>
+  </view>
+
+  <view class="booking-card" wx:for="{{bookings}}" wx:key="booking_id">
+    <view class="card-header">
+      <view class="status-tag tag-{{item.status}}">{{statusText[item.status]}}</view>
+      <text class="booking-date">{{item.booking_date}}</text>
+    </view>
+    
+    <view class="card-body">
+      <view class="info-row">
+        <text class="label">用户：</text>
+        <text class="value">{{item.user_name}} ({{item.user_phone}})</text>
+      </view>
+      <view class="info-row">
+        <text class="label">设施：</text>
+        <text class="value">{{item.facility_name}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">时间：</text>
+        <text class="value">{{item.start_time}} - {{item.end_time}}</text>
+      </view>
+      <view class="info-row" wx:if="{{item.audit_comment}}">
+        <text class="label">意见：</text>
+        <text class="value">{{item.audit_comment}}</text>
+      </view>
+      <view class="info-row" wx:if="{{item.auditor_name}}">
+        <text class="label">审核员：</text>
+        <text class="value">{{item.auditor_name}}</text>
+      </view>
+      <view class="info-row" wx:if="{{item.audit_time}}">
+        <text class="label">审核时间：</text>
+        <text class="value">{{item.audit_time}}</text>
+      </view>
+    </view>
+    
+    <!-- 异常处理按钮（仅对已通过的预约） -->
+    <view class="card-footer" wx:if="{{item.status === 'approved'}}">
+      <view class="exception-btns">
+        <button class="btn-exception" bindtap="showExceptionAction" data-id="{{item.booking_id}}" data-action="complete">标记完成</button>
+        <button class="btn-exception cancel" bindtap="showExceptionAction" data-id="{{item.booking_id}}" data-action="cancel">取消预约</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{bookings.length === 0 && !loading}}">
+    <text class="empty-text">暂无预约记录</text>
+  </view>
+
+  <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">
+    <text>加载更多</text>
+  </view>
+</view>
+
+<!-- 异常处理弹窗 -->
+<view class="modal-mask" wx:if="{{showModal}}" bindtap="hideModal"></view>
+<view class="modal-content" wx:if="{{showModal}}">
+  <view class="modal-header">异常处理</view>
+  <view class="modal-body">
+    <view class="form-item">
+      <view class="form-label">处理说明</view>
+      <textarea class="form-textarea" placeholder="请输入处理说明" bindinput="onCommentInput" maxlength="200"></textarea>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <button class="btn-cancel" bindtap="hideModal">取消</button>
+    <button class="btn-confirm" bindtap="handleException">确认处理</button>
+  </view>
+</view>
+

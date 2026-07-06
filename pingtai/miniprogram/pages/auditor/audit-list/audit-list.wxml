@@ -1,0 +1,32 @@
+<!--pages/auditor/audit-list/audit-list.wxml-->
+<view class="audit-list-container">
+  <view class="audit-card" wx:for="{{bookings}}" wx:key="booking_id">
+    <view class="card-header">
+      <text class="user-name">{{item.user_name}}</text>
+      <text class="phone">{{item.user_phone}}</text>
+    </view>
+
+    <view class="booking-info">
+      <text class="facility-name">📋 {{item.facility_name}}</text>
+      <text class="booking-time">📅 {{item.booking_date}} {{item.start_time}}-{{item.end_time}}</text>
+      <text class="purpose" wx:if="{{item.purpose}}">📝 {{item.purpose}}</text>
+    </view>
+
+    <view class="audit-actions">
+      <button class="btn-reject" size="mini" bindtap="handleReject" data-id="{{item.booking_id}}">拒绝</button>
+      <button class="btn-approve" size="mini" bindtap="handleApprove" data-id="{{item.booking_id}}">通过</button>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{bookings.length === 0}}">
+    <text class="empty-text">暂无待审核预约</text>
+  </view>
+
+  <!-- 导航按钮 -->
+  <view class="nav-buttons">
+    <button bindtap="goToAudited">查看已审核</button>
+    <button bindtap="goToFeedbacks">处理反馈</button>
+    <button class="btn-logout" bindtap="handleLogout">退出登录</button>
+  </view>
+</view>
+

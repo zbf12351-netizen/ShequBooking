@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "待审核预约",
+  "usingComponents": {},
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

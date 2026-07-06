@@ -1,0 +1,83 @@
+<!--pages/profile/profile.wxml-->
+<custom-tabbar active="{{3}}" tabs="{{tabBarConfig}}" bind:change="onTabChange"></custom-tabbar>
+<view class="profile-container">
+  <!-- 未登录状态 -->
+  <view class="guest-section" wx:if="{{!isLoggedIn}}">
+    <view class="guest-avatar">👤</view>
+    <text class="guest-title">未登录</text>
+    <text class="guest-desc">登录后查看和管理您的预约信息</text>
+    <view class="guest-buttons">
+      <button class="btn-primary" bindtap="goToLogin">立即登录</button>
+      <button class="btn-secondary" bindtap="goToRegister">注册账号</button>
+    </view>
+  </view>
+
+  <!-- 已登录用户信息 -->
+  <view class="user-section" wx:else>
+    <view class="avatar">👤</view>
+    <view class="user-info">
+      <text class="username">{{userInfo.username}}</text>
+      <text class="phone">{{userInfo.phone}}</text>
+      <text class="role-tag">{{roleText[userInfo.role]}}</text>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="menu-section" wx:if="{{isLoggedIn}}">
+    <view class="menu-item" bindtap="goToNotifications">
+      <view class="menu-icon-wrapper">
+        <text class="menu-icon">🔔</text>
+        <view class="badge" wx:if="{{unreadCount > 0}}">{{unreadCount}}</view>
+      </view>
+      <text class="menu-text">消息通知</text>
+      <text class="menu-arrow">></text>
+    </view>
+
+    <view class="menu-item" bindtap="editProfile">
+      <text class="menu-icon">👤</text>
+      <text class="menu-text">个人信息</text>
+      <text class="menu-arrow">></text>
+    </view>
+
+    <view class="menu-item" bindtap="goToBookings">
+      <text class="menu-icon">📋</text>
+      <text class="menu-text">我的预约</text>
+      <text class="menu-arrow">></text>
+    </view>
+
+    <view class="menu-item" bindtap="goToFavorites">
+      <text class="menu-icon">⭐</text>
+      <text class="menu-text">我的收藏</text>
+      <text class="menu-arrow">></text>
+    </view>
+
+    <view class="menu-item" bindtap="goToFeedbacks">
+      <text class="menu-icon">💬</text>
+      <text class="menu-text">我的反馈</text>
+      <text class="menu-arrow">></text>
+    </view>
+
+    <!-- 审核员入口 -->
+    <view class="menu-item" wx:if="{{userInfo.role === 'auditor'}}" bindtap="goToAuditor">
+      <text class="menu-icon">✅</text>
+      <text class="menu-text">审核管理</text>
+      <text class="menu-arrow">></text>
+    </view>
+
+    <!-- 管理员入口 -->
+    <view class="menu-item" wx:if="{{userInfo.role === 'admin'}}" bindtap="goToAdmin">
+      <text class="menu-icon">⚙️</text>
+      <text class="menu-text">管理后台</text>
+      <text class="menu-arrow">></text>
+    </view>
+
+    <view class="menu-item" bindtap="changePassword">
+      <text class="menu-icon">🔒</text>
+      <text class="menu-text">修改密码</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 退出登录按钮（已登录时显示） -->
+  <button class="btn-logout" wx:if="{{isLoggedIn}}" bindtap="handleLogout">退出登录</button>
+</view>

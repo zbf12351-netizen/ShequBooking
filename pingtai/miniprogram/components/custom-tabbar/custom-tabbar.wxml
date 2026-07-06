@@ -1,0 +1,14 @@
+<!--components/custom-tabbar/custom-tabbar.wxml-->
+<view class="custom-tabbar">
+  <view 
+    class="tab-item {{active === index ? 'active' : ''}}" 
+    wx:for="{{tabs}}" 
+    wx:key="path"
+    bindtap="switchTab"
+    data-index="{{index}}"
+    data-path="{{item.pagePath}}"
+  >
+    <text class="tab-icon">{{item.icon}}</text>
+    <text class="tab-text">{{item.text}}</text>
+  </view>
+</view>

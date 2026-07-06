@@ -1,0 +1,27 @@
+<!--pages/review/review.wxml-->
+<view class="review-container">
+  <view class="facility-card">
+    <view class="facility-name">{{facility_name}}</view>
+    <view class="booking-info">
+      <text>{{booking_date}} {{start_time}} - {{end_time}}</text>
+    </view>
+  </view>
+
+  <view class="rating-section">
+    <view class="rating-label">服务评分</view>
+    <view class="stars">
+      <view class="star" wx:for="{{[1,2,3,4,5]}}" wx:key="*this" bindtap="setRating" data-rating="{{item}}">
+        <text class="star-icon {{item <= rating ? 'active' : ''}}">★</text>
+      </view>
+    </view>
+    <view class="rating-text">{{ratingText}}</view>
+  </view>
+
+  <view class="comment-section">
+    <view class="comment-label">评价内容（选填）</view>
+    <textarea class="comment-input" placeholder="请分享您的使用体验..." bindinput="onCommentInput" maxlength="200"></textarea>
+    <text class="char-count">{{comment.length}}/200</text>
+  </view>
+
+  <button class="submit-btn" bindtap="submitReview" disabled="{{!rating}}">提交评价</button>
+</view>

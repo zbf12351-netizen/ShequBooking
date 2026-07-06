@@ -1,0 +1,28 @@
+<!--pages/feedback-list/feedback-list.wxml-->
+<view class="feedback-list-container">
+  <view class="feedback-card" wx:for="{{feedbacks}}" wx:key="user_id">
+    <view class="feedback-header">
+      <text class="type-tag">{{typeText[item.type]}}</text>
+      <text class="status-tag tag-{{item.status}}">{{statusText[item.status]}}</text>
+    </view>
+    
+    <text class="feedback-content">{{item.content}}</text>
+    
+    <view class="feedback-reply" wx:if="{{item.reply}}">
+      <view class="reply-label">回复：</view>
+      <text class="reply-content">{{item.reply}}</text>
+      <text class="reply-time">{{item.reply_time}}</text>
+    </view>
+
+    <view class="feedback-time">{{item.created_at}}</view>
+  </view>
+
+  <view class="empty-state" wx:if="{{feedbacks.length === 0}}">
+    <text class="empty-text">暂无反馈记录</text>
+  </view>
+
+  <view class="fab" bindtap="createFeedback">
+    <text>+</text>
+  </view>
+</view>
+

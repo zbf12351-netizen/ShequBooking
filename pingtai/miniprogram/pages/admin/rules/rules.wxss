@@ -1,0 +1,151 @@
+/* pages/admin/rules/rules.wxss */
+.rules-container {
+  padding: 20rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
+.form-item {
+  margin-bottom: 16rpx;
+}
+
+.form-row {
+  display: flex;
+  gap: 12rpx;
+}
+
+.half {
+  flex: 1;
+}
+
+.label {
+  display: block;
+  color: #666;
+  margin-bottom: 6rpx;
+  font-size: 26rpx;
+}
+
+.input, .picker {
+  border: 1px solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 16rpx;
+  font-size: 28rpx;
+}
+
+.actions {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 8rpx;
+}
+
+.btn {
+  flex: 1;
+}
+
+.primary {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+}
+
+.plain {
+  border: 1px solid #4CAF50;
+  color: #4CAF50;
+  background: #fff;
+}
+
+.rule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.rule-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12rpx 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.rule-main {
+  flex: 1;
+}
+
+.rule-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.rule-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin: 8rpx 0;
+}
+
+.tag {
+  font-size: 24rpx;
+  color: #4CAF50;
+  background: #e8f5e9;
+  padding: 6rpx 10rpx;
+  border-radius: 8rpx;
+}
+
+.status {
+  font-size: 24rpx;
+  padding: 6rpx 10rpx;
+  border-radius: 8rpx;
+}
+
+.status.active {
+  color: #4CAF50;
+  background: #e8f5e9;
+}
+
+.status.disabled {
+  color: #f44336;
+  background: #ffebee;
+}
+
+.rule-time {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.rule-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 6rpx;
+  margin-left: 12rpx;
+}
+
+.danger {
+  border: 1px solid #f44336;
+  color: #f44336;
+  background: #fff;
+}
+
+.empty {
+  text-align: center;
+  color: #999;
+  padding: 20rpx 0;
+}
+
+/* pages/admin/rules/rules.wxss */
+.rules-container {
+  padding: 20rpx;
+}
+

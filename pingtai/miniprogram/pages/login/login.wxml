@@ -1,0 +1,54 @@
+<!--pages/login/login.wxml-->
+<view class="login-container">
+  <view class="login-header">
+    <view class="logo-text">🏢</view>
+    <text class="title">社区设施预订平台</text>
+    <text class="subtitle">德城区新园社区</text>
+  </view>
+
+  <view class="login-form">
+    <view class="form-item">
+      <view class="form-label">手机号</view>
+      <input 
+        class="form-input" 
+        type="number" 
+        placeholder="请输入手机号" 
+        value="{{phone}}"
+        bindinput="onPhoneInput"
+        maxlength="11"
+      />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">密码</view>
+      <input 
+        class="form-input" 
+        type="password" 
+        placeholder="请输入密码" 
+        value="{{password}}"
+        bindinput="onPasswordInput"
+      />
+    </view>
+
+    <button class="btn-login" bindtap="handleLogin">登录</button>
+
+    <view class="wechat-login-section">
+      <view class="divider">
+        <view class="line"></view>
+        <text class="divider-text">其他登录方式</text>
+        <view class="line"></view>
+      </view>
+      
+      <button class="btn-wechat" bindtap="handleWechatLogin">
+        <image class="wechat-icon" src="/images/wechat.png" mode="aspectFit"></image>
+        <text>微信授权登录</text>
+      </button>
+    </view>
+
+    <view class="register-link">
+      <text>还没有账号？</text>
+      <text class="link" bindtap="goRegister">立即注册</text>
+    </view>
+  </view>
+</view>
+

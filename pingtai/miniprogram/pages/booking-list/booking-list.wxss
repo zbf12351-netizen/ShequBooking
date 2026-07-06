@@ -1,0 +1,125 @@
+/* pages/booking-list/booking-list.wxss */
+.booking-list-container {
+  padding-bottom: 40rpx;
+}
+
+.status-tabs {
+  background-color: #ffffff;
+  padding: 20rpx;
+  white-space: nowrap;
+  margin-bottom: 20rpx;
+}
+
+.tab-item {
+  display: inline-block;
+  padding: 12rpx 32rpx;
+  background-color: #f5f5f5;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  color: #666666;
+  margin-right: 20rpx;
+}
+
+.tab-item.active {
+  background-color: #4CAF50;
+  color: #ffffff;
+}
+
+.bookings-list {
+  padding: 0 20rpx;
+}
+
+.booking-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.facility-name {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.status-tag {
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+
+.tag-draft { background-color: #e0e0e0; color: #666666; }
+.tag-pending { background-color: #fff3e0; color: #ff9800; }
+.tag-approved { background-color: #e8f5e9; color: #4CAF50; }
+.tag-rejected { background-color: #ffebee; color: #f44336; }
+.tag-cancelled { background-color: #f5f5f5; color: #999999; }
+.tag-completed { background-color: #e3f2fd; color: #2196F3; }
+
+.booking-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.info-item {
+  font-size: 26rpx;
+  color: #666666;
+  line-height: 1.6;
+}
+
+.booking-actions {
+  display: flex;
+  gap: 16rpx;
+  justify-content: flex-end;
+}
+
+.action-btn {
+  background-color: #f5f5f5;
+  color: #666666;
+  border: none;
+  font-size: 24rpx;
+}
+
+.action-btn.primary {
+  background-color: #4CAF50;
+  color: #ffffff;
+}
+
+.action-btn.danger {
+  background-color: #f44336;
+  color: #ffffff;
+}
+
+.fab {
+  position: fixed;
+  right: 40rpx;
+  bottom: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 64rpx;
+  font-weight: 300;
+  box-shadow: 0 8rpx 16rpx rgba(76, 175, 80, 0.4);
+}
+
+.btn-create {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  margin-top: 32rpx;
+}
+

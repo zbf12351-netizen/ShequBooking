@@ -1,0 +1,87 @@
+<!--pages/admin/export/export.wxml-->
+<view class="container">
+  <view class="section">
+    <view class="section-title">选择报表类型</view>
+    <view class="report-list">
+      <view class="report-item" bindtap="selectReport" data-type="bookings" wx:key="bookings">
+        <view class="report-icon">📅</view>
+        <view class="report-info">
+          <view class="report-name">预约报表</view>
+          <view class="report-desc">包含所有预约记录及状态</view>
+        </view>
+        <view class="report-arrow">›</view>
+      </view>
+      
+      <view class="report-item" bindtap="selectReport" data-type="users" wx:key="users">
+        <view class="report-icon">👥</view>
+        <view class="report-info">
+          <view class="report-name">用户报表</view>
+          <view class="report-desc">包含用户信息及活跃度</view>
+        </view>
+        <view class="report-arrow">›</view>
+      </view>
+      
+      <view class="report-item" bindtap="selectReport" data-type="facilities" wx:key="facilities">
+        <view class="report-icon">🏢</view>
+        <view class="report-info">
+          <view class="report-name">设施报表</view>
+          <view class="report-desc">包含设施使用率及评分</view>
+        </view>
+        <view class="report-arrow">›</view>
+      </view>
+      
+      <view class="report-item" bindtap="selectReport" data-type="feedbacks" wx:key="feedbacks">
+        <view class="report-icon">💬</view>
+        <view class="report-info">
+          <view class="report-name">反馈报表</view>
+          <view class="report-desc">包含用户反馈及处理情况</view>
+        </view>
+        <view class="report-arrow">›</view>
+      </view>
+      
+      <view class="report-item" bindtap="selectReport" data-type="auditors" wx:key="auditors">
+        <view class="report-icon">📋</view>
+        <view class="report-info">
+          <view class="report-name">审核员报表</view>
+          <view class="report-desc">包含审核员工作量统计</view>
+        </view>
+        <view class="report-arrow">›</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 时间范围选择 -->
+  <view class="section">
+    <view class="section-title">时间范围</view>
+    <view class="period-selector">
+      <view class="period-btn {{period === 'today' ? 'active' : ''}}" bindtap="setPeriod" data-period="today">今日</view>
+      <view class="period-btn {{period === 'week' ? 'active' : ''}}" bindtap="setPeriod" data-period="week">本周</view>
+      <view class="period-btn {{period === 'month' ? 'active' : ''}}" bindtap="setPeriod" data-period="month">本月</view>
+      <view class="period-btn {{period === 'year' ? 'active' : ''}}" bindtap="setPeriod" data-period="year">本年</view>
+      <view class="period-btn {{period === 'all' ? 'active' : ''}}" bindtap="setPeriod" data-period="all">全部</view>
+    </view>
+  </view>
+
+  <!-- 导出按钮 -->
+  <view class="section">
+    <button class="btn-export" bindtap="handleExport" loading="{{exporting}}">
+      {{exporting ? '导出中...' : '导出Excel报表'}}
+    </button>
+  </view>
+
+  <!-- 预览区域 -->
+  <view class="section" wx:if="{{previewData.length > 0}}">
+    <view class="section-title">数据预览</view>
+    <scroll-view scroll-x="true" class="preview-table">
+      <view class="table-header">
+        <view class="table-cell" wx:for="{{previewHeaders}}" wx:key="*this">{{item}}</view>
+      </view>
+      <view class="table-row" wx:for="{{previewData}}" wx:for-index="idx" wx:key="idx">
+        <view class="table-cell" wx:for="{{previewHeaders}}" wx:for-item="header" wx:key="header">
+          {{item[header]}}
+        </view>
+      </view>
+    </scroll-view>
+    <view class="preview-tip">共 {{previewData.length}} 条记录</view>
+  </view>
+</view>

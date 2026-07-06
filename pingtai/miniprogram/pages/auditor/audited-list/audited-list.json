@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "已审核记录",
+  "usingComponents": {},
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

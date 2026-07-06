@@ -1,0 +1,121 @@
+<!--pages/home/home.wxml-->
+<custom-tabbar active="{{0}}" tabs="{{tabBarConfig}}" bind:change="onTabChange"></custom-tabbar>
+<view class="home-container">
+  <!-- 用户欢迎区（已登录） -->
+  <view class="welcome-section" wx:if="{{isLoggedIn && userInfo}}">
+    <view class="welcome-text">
+      <text class="greeting">你好，{{userInfo.username}}！</text>
+      <text class="desc">欢迎使用社区设施预订平台</text>
+    </view>
+    <view class="avatar">👤</view>
+  </view>
+
+  <!-- 未登录引导区 -->
+  <view class="welcome-section welcome-guest" wx:else>
+    <view class="welcome-text">
+      <text class="greeting">欢迎使用</text>
+      <text class="desc">社区设施预订与优化服务平台</text>
+    </view>
+    <view class="auth-buttons">
+      <button class="btn-login" bindtap="goToLogin">登录</button>
+      <button class="btn-register" bindtap="goToRegister">注册</button>
+    </view>
+  </view>
+
+  <!-- 公告栏 -->
+  <view class="announcement-section">
+    <view class="section-header">
+      <text class="section-title">📢 公告资讯</text>
+      <text class="section-more" bindtap="goToAnnouncementList">查看更多 ></text>
+    </view>
+    <view class="announcement-list" wx:if="{{announcements.length > 0}}">
+      <view class="announcement-item" wx:for="{{announcements}}" wx:key="notification_id" bindtap="goToAnnouncementDetail" data-id="{{item.notification_id}}">
+        <view class="announcement-badge">公告</view>
+        <view class="announcement-content">
+          <text class="announcement-title">{{item.title}}</text>
+          <text class="announcement-time">{{item.created_at}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="empty-state" wx:else>
+      <text class="empty-text">暂无公告</text>
+    </view>
+  </view>
+
+  <!-- 快捷功能 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="goToFacilities">
+      <view class="action-icon">📋</view>
+      <text class="action-text">设施浏览</text>
+    </view>
+    <view class="action-item" bindtap="goToBooking">
+      <view class="action-icon">📅</view>
+      <text class="action-text">立即预约</text>
+    </view>
+    <view class="action-item" bindtap="goToMyBookings">
+      <view class="action-icon">📝</view>
+      <text class="action-text">我的预约</text>
+    </view>
+    <view class="action-item" bindtap="goToFeedback">
+      <view class="action-icon">💬</view>
+      <text class="action-text">帮助反馈</text>
+    </view>
+  </view>
+
+  <!-- 智能推荐（已登录用户显示） -->
+  <view class="section" wx:if="{{isLoggedIn}}">
+    <view class="section-header">
+      <text class="section-title">🎯 智能推荐</text>
+      <text class="section-more" bindtap="goToRecommend">查看更多 ></text>
+    </view>
+    <view class="facility-list" wx:if="{{recommendList.length > 0}}">
+      <view class="facility-card" wx:for="{{recommendList}}" wx:key="facility_id" bindtap="goToDetail" data-id="{{item.facility_id}}">
+        <view class="facility-image-placeholder">{{item.category}}</view>
+        <view class="facility-info">
+          <text class="facility-name">{{item.name}}</text>
+          <text class="facility-location">📍 {{item.location}}</text>
+          <view class="facility-tags">
+            <text class="tag tag-info">{{item.category}}</text>
+            <text class="facility-fav">⭐ 收藏 {{item.favorite_count || 0}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="empty-state" wx:else>
+      <text class="empty-text">继续探索更多设施以获得个性化推荐</text>
+    </view>
+  </view>
+
+  <!-- 未登录用户提示 -->
+  <view class="section" wx:else>
+    <view class="section-header">
+      <text class="section-title">🎯 智能推荐</text>
+    </view>
+    <view class="login-prompt-card">
+      <view class="prompt-icon">🔐</view>
+      <text class="prompt-title">登录后解锁个性化推荐</text>
+      <text class="prompt-desc">根据您的使用历史，为您推荐最适合的设施</text>
+      <button class="btn-primary" bindtap="goToLogin">立即登录</button>
+    </view>
+  </view>
+
+  <!-- 热门设施 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">🔥 热门设施</text>
+      <text class="section-more" bindtap="goToPopular">查看更多 ></text>
+    </view>
+    <view class="popular-list" wx:if="{{popularList.length > 0}}">
+      <view class="popular-item" wx:for="{{popularList}}" wx:key="facility_id" bindtap="goToDetail" data-id="{{item.facility_id}}">
+        <view class="popular-rank">{{index + 1}}</view>
+        <view class="popular-info">
+          <text class="popular-name">{{item.name}}</text>
+          <text class="popular-count">预约 {{item.booking_count}} 次 · 收藏 {{item.favorite_count || 0}} 次</text>
+        </view>
+      </view>
+    </view>
+    <view class="empty-state" wx:else>
+      <text class="empty-text">暂无热门设施</text>
+    </view>
+  </view>
+</view>

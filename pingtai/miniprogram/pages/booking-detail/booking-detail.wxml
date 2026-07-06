@@ -1,0 +1,78 @@
+<!--pages/booking-detail/booking-detail.wxml-->
+<view class="detail-container">
+  <view class="detail-card">
+    <view class="card-header">
+      <text class="title">预约信息</text>
+      <text class="status-tag tag-{{booking.status}}">{{statusText[booking.status]}}</text>
+    </view>
+
+    <view class="detail-item">
+      <text class="label">设施名称：</text>
+      <text class="value">{{booking.facility_name}}</text>
+    </view>
+
+    <view class="detail-item">
+      <text class="label">预约日期：</text>
+      <text class="value">{{booking.booking_date}}</text>
+    </view>
+
+    <view class="detail-item">
+      <text class="label">预约时间：</text>
+      <text class="value">{{booking.start_time}} - {{booking.end_time}}</text>
+    </view>
+
+    <view class="detail-item" wx:if="{{booking.purpose}}">
+      <text class="label">预约目的：</text>
+      <text class="value">{{booking.purpose}}</text>
+    </view>
+
+    <view class="detail-item" wx:if="{{booking.auditor_name}}">
+      <text class="label">审核人：</text>
+      <text class="value">{{booking.auditor_name}}</text>
+    </view>
+
+    <view class="detail-item" wx:if="{{booking.audit_time}}">
+      <text class="label">审核时间：</text>
+      <text class="value">{{booking.audit_time}}</text>
+    </view>
+
+    <view class="detail-item" wx:if="{{booking.audit_comment}}">
+      <text class="label">审核意见：</text>
+      <text class="value">{{booking.audit_comment}}</text>
+    </view>
+
+    <!-- 签到信息 -->
+    <view class="detail-item" wx:if="{{booking.checked_in}}">
+      <text class="label">签到时间：</text>
+      <text class="value">{{booking.checkin_time}}</text>
+    </view>
+  </view>
+
+  <!-- 签到按钮（仅已通过且未签到时显示） -->
+  <view class="action-section" wx:if="{{booking.status === 'approved' && !booking.checked_in}}">
+    <button class="checkin-btn" bindtap="handleCheckin">签到</button>
+    <view class="checkin-info">
+      <text class="checkin-hint">请在预约开始前30分钟至开始后15分钟内签到</text>
+      <!-- 位置签到提示 -->
+      <view class="location-hint" wx:if="{{booking.facility && booking.facility.require_checkin_location}}">
+        <text class="location-icon">📍</text>
+        <text class="location-text">此设施需要位置验证，签到时将获取您的位置</text>
+      </view>
+      <view class="location-hint success" wx:else>
+        <text class="location-icon">✓</text>
+        <text class="location-text">此设施无需位置验证</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评价按钮（仅已完成且未评价时显示） -->
+  <view class="action-section" wx:if="{{booking.status === 'completed' && !booking.has_reviewed}}">
+    <button class="review-btn" bindtap="goToReview">去评价</button>
+  </view>
+
+  <!-- 已评价提示 -->
+  <view class="action-section" wx:if="{{booking.has_reviewed}}">
+    <text class="reviewed-hint">已评价</text>
+  </view>
+</view>
+

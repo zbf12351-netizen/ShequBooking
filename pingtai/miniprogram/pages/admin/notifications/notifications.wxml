@@ -1,0 +1,55 @@
+<!--pages/admin/notifications/notifications.wxml-->
+<view class="container">
+  <view class="card">
+    <view class="card-header">
+      <text class="card-title">发布系统通知</text>
+    </view>
+    
+    <view class="form-group">
+      <text class="label">通知标题</text>
+      <input class="input" placeholder="请输入通知标题" value="{{title}}" bindinput="onTitleInput"/>
+    </view>
+    
+    <view class="form-group">
+      <text class="label">通知类型</text>
+      <picker bindchange="onTypeChange" value="{{typeIndex}}" range="{{notificationTypes}}">
+        <view class="picker">
+          {{notificationTypes[typeIndex]}}
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    
+    <view class="form-group">
+      <text class="label">通知内容</text>
+      <textarea class="textarea" placeholder="请输入通知内容" value="{{content}}" bindinput="onContentInput" maxlength="-1"/>
+    </view>
+    
+    <view class="submit-btn" bindtap="handleSubmit">发布通知</view>
+  </view>
+  
+  <!-- 历史通知记录 -->
+  <view class="card">
+    <view class="card-header">
+      <text class="card-title">通知记录</text>
+    </view>
+    
+    <view class="notification-list" wx:if="{{notifications.length > 0}}">
+      <block wx:for="{{notifications}}" wx:key="notification_id">
+        <view class="notification-item">
+          <view class="notification-header">
+            <text class="notification-title">{{item.title}}</text>
+            <text class="notification-time">{{item.created_at}}</text>
+          </view>
+          <view class="notification-type">
+            <text class="type-tag tag-{{item.type}}">{{item.type}}</text>
+          </view>
+          <view class="notification-content">{{item.content}}</view>
+        </view>
+      </block>
+    </view>
+    <view class="empty-tip" wx:else>
+      暂无通知记录
+    </view>
+  </view>
+</view>

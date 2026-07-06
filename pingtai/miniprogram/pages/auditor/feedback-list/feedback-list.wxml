@@ -1,0 +1,39 @@
+<!--pages/auditor/feedback-list/feedback-list.wxml-->
+<view class="feedback-list-container">
+  <!-- 切换标签 -->
+  <view class="tab-bar">
+    <view class="tab-item {{activeTab === 'pending' ? 'active' : ''}}" bindtap="switchTab" data-tab="pending">
+      待处理 ({{pendingCount}})
+    </view>
+    <view class="tab-item {{activeTab === 'replied' ? 'active' : ''}}" bindtap="switchTab" data-tab="replied">
+      已处理 ({{repliedCount}})
+    </view>
+  </view>
+
+  <!-- 反馈列表 -->
+  <view class="feedback-card" wx:for="{{feedbacks}}" wx:key="feedback_id">
+    <view class="feedback-header">
+      <text class="type">{{typeText[item.type]}}</text>
+      <text class="user">{{item.user_name}}</text>
+      <text class="status {{item.status}}">{{item.status === 'replied' ? '已回复' : '待处理'}}</text>
+    </view>
+    <text class="content">{{item.content}}</text>
+    
+    <!-- 回复信息（已处理时显示） -->
+    <view class="reply-info" wx:if="{{item.status === 'replied' || item.status === 'closed'}}">
+      <text class="reply-label">回复：</text>
+      <text class="reply-content">{{item.reply}}</text>
+      <text class="replier-info">处理人：{{item.replier_name || '未知'}} · {{item.reply_time}}</text>
+    </view>
+    
+    <!-- 回复按钮（待处理时显示） -->
+    <button class="btn-reply" size="mini" bindtap="handleReply" data-id="{{item.feedback_id}}" wx:if="{{item.status === 'pending'}}">
+      回复
+    </button>
+  </view>
+
+  <view class="empty-state" wx:if="{{feedbacks.length === 0}}">
+    <text class="empty-text">{{activeTab === 'pending' ? '暂无待处理反馈' : '暂无已处理反馈'}}</text>
+  </view>
+</view>
+

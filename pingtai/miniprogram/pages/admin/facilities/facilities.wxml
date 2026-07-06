@@ -1,0 +1,119 @@
+<!--pages/admin/facilities/facilities.wxml-->
+<view class="facilities-container">
+  <!-- 分类标签筛选 -->
+  <view class="category-tabs">
+    <view 
+      wx:for="{{categoryList}}" 
+      wx:key="index" 
+      class="tab-item {{selectedCategory === item ? 'active' : ''}}"
+      data-category="{{item}}"
+      bindtap="onCategoryTap"
+    >
+      {{item}}
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">{{editingId ? '编辑设施' : '新建设施'}}</view>
+    <view class="form-item">
+      <text class="label">名称*</text>
+      <input class="input" placeholder="设施名称" data-field="name" bindinput="onInput" value="{{form.name}}" />
+    </view>
+    <view class="form-item">
+      <text class="label">类别*</text>
+      <picker mode="selector" range="{{categoryOptions}}" value="{{selectedCategoryIndex}}" bindchange="onCategoryChange">
+        <view class="picker">{{form.category || '请选择类别'}}</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">位置*</text>
+      <input class="input" placeholder="具体位置" data-field="location" bindinput="onInput" value="{{form.location}}" />
+    </view>
+    <view class="form-item">
+      <text class="label">容量</text>
+      <input class="input" type="number" placeholder="人数" data-field="capacity" bindinput="onNumberInput" value="{{form.capacity}}" />
+    </view>
+    <view class="form-item">
+      <text class="label">描述</text>
+      <textarea class="textarea" placeholder="简介" data-field="description" bindinput="onInput" value="{{form.description}}" />
+    </view>
+    <view class="form-item">
+      <text class="label">图片</text>
+      <view class="image-upload">
+        <view class="image-preview" wx:if="{{form.image_url}}">
+          <image src="{{form.image_url}}" mode="aspectFill" />
+          <view class="image-remove" bindtap="removeImage">×</view>
+        </view>
+        <view class="image-add" wx:else bindtap="chooseImage">
+          <text class="icon">+</text>
+          <text class="text">添加图片</text>
+        </view>
+      </view>
+    </view>
+    <view class="form-item">
+      <text class="label">状态</text>
+      <picker mode="selector" range="{{['启用', '停用']}}" value="{{form.status === 1 ? 0 : 1}}" bindchange="onStatusChange">
+        <view class="picker">{{form.status === 1 ? '启用' : '停用'}}</view>
+      </picker>
+    </view>
+
+    <!-- 签到设置 -->
+    <view class="form-section">
+      <view class="section-title">签到设置</view>
+      <view class="form-item">
+        <text class="label">位置签到</text>
+        <picker mode="selector" range="{{['需要位置验证', '无需位置验证']}}" value="{{form.require_checkin_location ? 0 : 1}}" bindchange="onRequireLocationChange">
+          <view class="picker">{{form.require_checkin_location ? '需要位置验证' : '无需位置验证'}}</view>
+        </picker>
+      </view>
+      <view class="form-item" wx:if="{{form.require_checkin_location}}">
+        <text class="label">经度</text>
+        <input class="input" type="digit" placeholder="经度" data-field="longitude" bindinput="onInput" value="{{form.longitude}}" />
+      </view>
+      <view class="form-item" wx:if="{{form.require_checkin_location}}">
+        <text class="label">纬度</text>
+        <input class="input" type="digit" placeholder="纬度" data-field="latitude" bindinput="onInput" value="{{form.latitude}}" />
+      </view>
+      <view class="form-item" wx:if="{{form.require_checkin_location}}">
+        <text class="label">定位按钮</text>
+        <button class="btn plain" size="mini" bindtap="getLocation">获取当前位置</button>
+        <text class="location-tip">⚠️ 建议用手机获取真实位置</text>
+      </view>
+      <view class="form-item" wx:if="{{form.require_checkin_location}}">
+        <text class="label">签到半径(米)</text>
+        <input class="input" type="number" placeholder="如 200" data-field="checkin_radius" bindinput="onNumberInput" value="{{form.checkin_radius}}" />
+      </view>
+    </view>
+    <view class="actions">
+      <button class="btn primary" bindtap="submitFacility">{{editingId ? '保存修改' : '创建设施'}}</button>
+      <button class="btn plain" wx:if="{{editingId}}" bindtap="resetForm">取消编辑</button>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">设施列表</view>
+    <view class="facility-list">
+      <view class="facility-row" wx:for="{{facilities}}" wx:key="facility_id">
+        <view class="facility-main">
+          <view class="facility-name">{{item.name}}</view>
+          <view class="facility-meta">
+            <text class="tag">{{item.category}}</text>
+            <text class="tag">容量 {{item.capacity}}</text>
+            <text class="tag">预约 {{item.booking_count || 0}}次</text>
+            <text class="status {{item.status === 1 ? 'active' : 'disabled'}}">{{item.status === 1 ? '启用' : '停用'}}</text>
+          </view>
+          <view class="facility-location">📍 {{item.location}}</view>
+        </view>
+        <view class="facility-actions">
+          <button class="btn plain" size="mini" data-id="{{item.facility_id}}" bindtap="editFacility">编辑</button>
+          <button class="btn danger" size="mini" data-id="{{item.facility_id}}" bindtap="deleteFacility">删除</button>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{facilities.length === 0 && !loading}}">暂无设施</view>
+      <view class="load-more" wx:if="{{facilities.length > 0 && facilities.length < total && !loading}}" bindtap="loadMore">加载更多</view>
+      <view class="loading" wx:if="{{loading}}">加载中...</view>
+      <view class="load-complete" wx:if="{{facilities.length > 0 && facilities.length >= total}}">已加载全部</view>
+    </view>
+  </view>
+</view>
+

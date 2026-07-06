@@ -1,0 +1,11 @@
+<!--pages/notification-detail/notification-detail.wxml-->
+<view class="detail-container">
+  <view class="detail-card">
+    <view class="card-header">
+      <view class="type-badge type-{{notification.type}}">{{typeNames[notification.type]}}</view>
+      <text class="time">{{notification.created_at}}</text>
+    </view>
+    <view class="card-title">{{notification.title}}</view>
+    <view class="card-content">{{notification.content}}</view>
+  </view>
+</view>

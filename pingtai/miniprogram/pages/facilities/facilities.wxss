@@ -1,0 +1,188 @@
+/* pages/facilities/facilities.wxss */
+.facilities-container {
+  padding-bottom: 40rpx;
+}
+
+.search-section {
+  background-color: #ffffff;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 32rpx;
+  padding: 16rpx 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.search-btn {
+  font-size: 32rpx;
+  margin-left: 16rpx;
+}
+
+.category-scroll {
+  white-space: nowrap;
+}
+
+.category-list {
+  display: flex;
+  gap: 20rpx;
+}
+
+.category-item {
+  display: inline-block;
+  padding: 12rpx 28rpx;
+  background-color: #f5f5f5;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  color: #666666;
+}
+
+.category-item.active {
+  background-color: #4CAF50;
+  color: #ffffff;
+}
+
+.facility-list {
+  padding: 0 20rpx;
+}
+
+.facility-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.facility-image {
+  width: 100%;
+  height: 360rpx;
+  overflow: hidden;
+}
+
+.facility-image image {
+  width: 100%;
+  height: 100%;
+}
+
+.facility-image-placeholder {
+  width: 100%;
+  height: 360rpx;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.facility-info {
+  padding: 24rpx;
+}
+
+.facility-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.facility-actions {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.facility-name {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: bold;
+}
+
+.facility-status {
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+
+.favorite-icon {
+  font-size: 32rpx;
+  color: #999999;
+  padding: 8rpx 12rpx;
+}
+
+/* 已收藏状态 - 高优先级 */
+.favorite-icon.active {
+  color: #ff9800 !important;
+}
+
+.favorite-icon-disabled {
+  color: #cccccc;
+}
+
+.facility-status.available {
+  background-color: #e8f5e9;
+  color: #4CAF50;
+}
+
+.facility-status.unavailable {
+  background-color: #ffebee;
+  color: #f44336;
+}
+
+.facility-desc {
+  font-size: 26rpx;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 16rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.facility-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.facility-location {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.facility-meta {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.facility-rating {
+  font-size: 24rpx;
+  color: #FF9800;
+}
+
+.facility-fav {
+  font-size: 24rpx;
+  color: #ff9800;
+}
+
+.load-more {
+  text-align: center;
+  padding: 40rpx;
+  color: #999999;
+  font-size: 28rpx;
+}
+

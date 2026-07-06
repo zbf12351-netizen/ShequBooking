@@ -1,0 +1,55 @@
+<!--pages/admin/users/users.wxml-->
+<view class="users-container">
+  <view class="card">
+    <view class="card-title">创建用户</view>
+    <view class="form-item">
+      <text class="label">手机号</text>
+      <input class="input" placeholder="11位手机号" data-field="auditorPhone" bindinput="onInput" value="{{auditorPhone}}" />
+    </view>
+    <view class="form-item">
+      <text class="label">用户名</text>
+      <input class="input" placeholder="姓名" data-field="auditorName" bindinput="onInput" value="{{auditorName}}" />
+    </view>
+    <view class="form-item">
+      <text class="label">密码</text>
+      <input class="input" placeholder="初始密码" password data-field="auditorPassword" bindinput="onInput" value="{{auditorPassword}}" />
+    </view>
+    <view class="form-item">
+      <text class="label">用户角色</text>
+      <view class="role-selector">
+        <text class="role-option {{auditorRole === 'resident' ? 'active' : ''}}" data-role="resident" bindtap="onRoleSelect">普通用户</text>
+        <text class="role-option {{auditorRole === 'auditor' ? 'active' : ''}}" data-role="auditor" bindtap="onRoleSelect">审核员</text>
+      </view>
+    </view>
+    <button class="btn primary" bindtap="createUser">创建用户</button>
+  </view>
+
+  <view class="card">
+    <view class="card-title">用户列表</view>
+    <view class="filter">
+      <text class="filter-item {{roleFilter === 'all' ? 'active' : ''}}" data-role="all" bindtap="onRoleChange">全部</text>
+      <text class="filter-item {{roleFilter === 'resident' ? 'active' : ''}}" data-role="resident" bindtap="onRoleChange">居民</text>
+      <text class="filter-item {{roleFilter === 'auditor' ? 'active' : ''}}" data-role="auditor" bindtap="onRoleChange">审核员</text>
+      <text class="filter-item {{roleFilter === 'admin' ? 'active' : ''}}" data-role="admin" bindtap="onRoleChange">管理员</text>
+    </view>
+
+    <view class="user-list">
+      <view class="user-row" wx:for="{{users}}" wx:key="user_id">
+        <view class="user-main">
+          <view class="user-name">{{item.username}} <text class="role-tag">{{item.role}}</text></view>
+          <view class="user-phone">{{item.phone}}</view>
+        </view>
+        <view class="user-actions">
+          <text class="status {{item.status === 1 ? 'active' : 'disabled'}}">{{item.status === 1 ? '启用' : '禁用'}}</text>
+          <block wx:if="{{item.role !== 'admin'}}">
+            <button class="btn plain" size="mini" data-id="{{item.user_id}}" bindtap="toggleStatus">{{item.status === 1 ? '禁用' : '启用'}}</button>
+            <button class="btn danger" size="mini" data-id="{{item.user_id}}" bindtap="deleteUser">删除</button>
+          </block>
+          <text wx:else class="action-hint">不可操作</text>
+        </view>
+      </view>
+      <view class="empty" wx:if="{{users.length === 0 && !loading}}">暂无用户</view>
+    </view>
+  </view>
+</view>
+

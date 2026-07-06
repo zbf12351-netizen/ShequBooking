@@ -1,0 +1,26 @@
+<!--pages/feedback/feedback.wxml-->
+<view class="feedback-container">
+  <view class="form-card">
+    <view class="form-item">
+      <view class="form-label">反馈类型</view>
+      <picker mode="selector" range="{{feedbackTypes}}" range-key="label" value="{{typeIndex}}" bindchange="onTypeChange">
+        <view class="picker-value">{{feedbackTypes[typeIndex].label}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">反馈内容</view>
+      <textarea 
+        class="form-textarea" 
+        placeholder="请详细描述您的问题或建议" 
+        value="{{content}}"
+        bindinput="onContentInput"
+        maxlength="500"
+      ></textarea>
+      <view class="textarea-count">{{content.length}}/500</view>
+    </view>
+
+    <button class="btn-submit" bindtap="handleSubmit">提交反馈</button>
+  </view>
+</view>
+

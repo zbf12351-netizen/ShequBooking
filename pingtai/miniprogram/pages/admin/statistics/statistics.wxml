@@ -1,0 +1,177 @@
+<!--pages/admin/statistics/statistics.wxml-->
+<view class="container">
+  <!-- 数据概览 -->
+  <view class="section">
+    <view class="section-title">数据概览</view>
+    <view class="overview-grid">
+      <view class="overview-card">
+        <view class="overview-value">{{overview.users.total}}</view>
+        <view class="overview-label">总用户数</view>
+      </view>
+      <view class="overview-card">
+        <view class="overview-value">{{overview.facilities}}</view>
+        <view class="overview-label">设施数量</view>
+      </view>
+      <view class="overview-card">
+        <view class="overview-value">{{overview.bookings.total}}</view>
+        <view class="overview-label">总预约数</view>
+      </view>
+      <view class="overview-card warning">
+        <view class="overview-value">{{overview.bookings.pending}}</view>
+        <view class="overview-label">待审核</view>
+      </view>
+      <view class="overview-card">
+        <view class="overview-value">{{overview.bookings.today_new}}</view>
+        <view class="overview-label">今日新增</view>
+      </view>
+      <view class="overview-card">
+        <view class="overview-value">{{overview.bookings.today_checkins}}</view>
+        <view class="overview-label">今日签到</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 时间筛选 -->
+  <view class="section">
+    <view class="section-title">时间范围</view>
+    <view class="period-selector">
+      <view class="period-btn {{period === 'today' ? 'active' : ''}}" bindtap="setPeriod" data-period="today">今日</view>
+      <view class="period-btn {{period === 'week' ? 'active' : ''}}" bindtap="setPeriod" data-period="week">本周</view>
+      <view class="period-btn {{period === 'month' ? 'active' : ''}}" bindtap="setPeriod" data-period="month">本月</view>
+      <view class="period-btn {{period === 'year' ? 'active' : ''}}" bindtap="setPeriod" data-period="year">本年</view>
+    </view>
+  </view>
+
+  <!-- 预约统计 -->
+  <view class="section">
+    <view class="section-title">预约统计</view>
+    <view class="stat-box">
+      <view class="stat-row">
+        <text class="stat-label">总预约数</text>
+        <text class="stat-value">{{bookingStats.total}}</text>
+      </view>
+      <view class="stat-detail">
+        <view class="detail-item">
+          <text class="dot pending"></text>
+          <text>待审核: {{bookingStats.status_distribution.pending || 0}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="dot approved"></text>
+          <text>已通过: {{bookingStats.status_distribution.approved || 0}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="dot rejected"></text>
+          <text>已拒绝: {{bookingStats.status_distribution.rejected || 0}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="dot completed"></text>
+          <text>已完成: {{bookingStats.status_distribution.completed || 0}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 每日趋势图（用列表模拟） -->
+    <view class="daily-chart">
+      <view class="chart-title">每日预约趋势</view>
+      <view class="chart-bars">
+        <view class="chart-item" wx:for="{{bookingStats.daily}}" wx:key="date">
+          <view class="bar-container">
+            <view class="bar" style="height: {{item.count * 10}}rpx;"></view>
+          </view>
+          <view class="bar-date">{{item.date}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 设施使用率排行 -->
+  <view class="section">
+    <view class="section-title">设施使用率排行</view>
+    <view class="ranking-list">
+      <view class="ranking-item" wx:for="{{facilityUsage}}" wx:key="name">
+        <view class="rank-num">{{index + 1}}</view>
+        <view class="rank-info">
+          <view class="rank-name">{{item.name}}</view>
+          <view class="rank-category">{{item.category}}</view>
+        </view>
+        <view class="rank-stats">
+          <view class="stat-num">{{item.booking_count}}</view>
+          <view class="stat-label-small">预约</view>
+        </view>
+        <view class="rank-stats">
+          <view class="stat-num highlight">{{item.usage_rate}}%</view>
+          <view class="stat-label-small">使用率</view>
+        </view>
+      </view>
+      <view class="empty-tip" wx:if="{{facilityUsage.length === 0}}">暂无数据</view>
+    </view>
+  </view>
+
+  <!-- 用户活跃度 -->
+  <view class="section">
+    <view class="section-title">用户活跃度</view>
+    <view class="stat-box">
+      <view class="stat-row">
+        <text class="stat-label">新增用户</text>
+        <text class="stat-value">{{userActivity.new_users}}</text>
+      </view>
+    </view>
+    <view class="ranking-list">
+      <view class="ranking-item" wx:for="{{userActivity.active_users}}" wx:key="username">
+        <view class="rank-num">{{index + 1}}</view>
+        <view class="rank-info">
+          <view class="rank-name">{{item.username}}</view>
+          <view class="rank-phone">{{item.phone}}</view>
+        </view>
+        <view class="rank-stats">
+          <view class="stat-num">{{item.booking_count}}</view>
+          <view class="stat-label-small">预约</view>
+        </view>
+      </view>
+      <view class="empty-tip" wx:if="{{userActivity.active_users.length === 0}}">暂无数据</view>
+    </view>
+  </view>
+
+  <!-- 审核员工作量 -->
+  <view class="section">
+    <view class="section-title">审核员工作量</view>
+    <view class="ranking-list">
+      <view class="ranking-item" wx:for="{{auditorWorkload}}" wx:key="username">
+        <view class="rank-num">{{index + 1}}</view>
+        <view class="rank-info">
+          <view class="rank-name">{{item.username}}</view>
+          <view class="rank-phone">{{item.phone}}</view>
+        </view>
+        <view class="rank-stats">
+          <view class="stat-num">{{item.total_audited}}</view>
+          <view class="stat-label-small">审核</view>
+        </view>
+        <view class="rank-stats">
+          <view class="stat-num highlight">{{item.approval_rate}}%</view>
+          <view class="stat-label-small">通过率</view>
+        </view>
+      </view>
+      <view class="empty-tip" wx:if="{{auditorWorkload.length === 0}}">暂无数据</view>
+    </view>
+  </view>
+
+  <!-- 反馈统计 -->
+  <view class="section">
+    <view class="section-title">反馈统计</view>
+    <view class="stat-box">
+      <view class="stat-row">
+        <text class="stat-label">总反馈数</text>
+        <text class="stat-value">{{feedbackStats.total}}</text>
+      </view>
+      <view class="stat-detail">
+        <view class="detail-item">
+          <text class="dot pending"></text>
+          <text>待处理: {{feedbackStats.status_distribution.pending || 0}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="dot approved"></text>
+          <text>已处理: {{feedbackStats.status_distribution.resolved || 0}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

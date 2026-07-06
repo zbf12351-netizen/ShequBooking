@@ -1,0 +1,62 @@
+<!--pages/register/register.wxml-->
+<view class="register-container">
+  <view class="register-header">
+    <text class="title">创建账号</text>
+    <text class="subtitle">欢迎加入社区设施预订平台</text>
+  </view>
+
+  <view class="register-form">
+    <view class="form-item">
+      <view class="form-label">手机号</view>
+      <input 
+        class="form-input" 
+        type="number" 
+        placeholder="请输入手机号" 
+        value="{{phone}}"
+        bindinput="onPhoneInput"
+        maxlength="11"
+      />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">用户名</view>
+      <input 
+        class="form-input" 
+        type="text" 
+        placeholder="请输入用户名" 
+        value="{{username}}"
+        bindinput="onUsernameInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">密码</view>
+      <input 
+        class="form-input" 
+        type="password" 
+        placeholder="请输入密码（至少6位）" 
+        value="{{password}}"
+        bindinput="onPasswordInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">确认密码</view>
+      <input 
+        class="form-input" 
+        type="password" 
+        placeholder="请再次输入密码" 
+        value="{{confirmPassword}}"
+        bindinput="onConfirmPasswordInput"
+      />
+    </view>
+
+    <button class="btn-register" bindtap="handleRegister">注册</button>
+
+    <view class="login-link">
+      <text>已有账号？</text>
+      <text class="link" bindtap="goLogin">立即登录</text>
+    </view>
+  </view>
+</view>
+

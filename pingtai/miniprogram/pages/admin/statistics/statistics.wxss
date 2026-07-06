@@ -1,0 +1,308 @@
+/* pages/admin/statistics/statistics.wxss */
+.container {
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.section {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+/* 数据概览 */
+.overview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.overview-card {
+  width: calc(33.33% - 14rpx);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16rpx;
+  padding: 24rpx 16rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.overview-card:nth-child(2) {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.overview-card:nth-child(3) {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.overview-card:nth-child(4) {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.overview-card:nth-child(5) {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.overview-card:nth-child(6) {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #333;
+}
+
+.overview-card.warning {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+}
+
+.overview-value {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.overview-label {
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+/* 时间筛选 */
+.period-selector {
+  display: flex;
+  gap: 16rpx;
+}
+
+.period-btn {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx;
+  border-radius: 8rpx;
+  background-color: #f5f5f5;
+  color: #666;
+  font-size: 26rpx;
+}
+
+.period-btn.active {
+  background-color: #1890ff;
+  color: #fff;
+}
+
+/* 统计卡片 */
+.stat-box {
+  background-color: #f9f9f9;
+  border-radius: 12rpx;
+  padding: 20rpx;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.stat-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.stat-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.stat-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+}
+
+.dot.pending {
+  background-color: #faad14;
+}
+
+.dot.approved {
+  background-color: #52c41a;
+}
+
+.dot.rejected {
+  background-color: #ff4d4f;
+}
+
+.dot.completed {
+  background-color: #1890ff;
+}
+
+/* 每日趋势图 */
+.daily-chart {
+  margin-top: 20rpx;
+}
+
+.chart-title {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 200rpx;
+  padding: 20rpx 0;
+  overflow-x: auto;
+}
+
+.chart-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60rpx;
+}
+
+.bar-container {
+  height: 150rpx;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bar {
+  width: 30rpx;
+  background: linear-gradient(180deg, #1890ff 0%, #69c0ff 100%);
+  border-radius: 4rpx 4rpx 0 0;
+  min-height: 4rpx;
+}
+
+.bar-date {
+  font-size: 20rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 排行榜 */
+.ranking-list {
+  margin-top: 16rpx;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.ranking-item:last-child {
+  border-bottom: none;
+}
+
+.rank-num {
+  width: 50rpx;
+  height: 50rpx;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #666;
+  margin-right: 20rpx;
+}
+
+.ranking-item:nth-child(1) .rank-num {
+  background-color: #ffd700;
+  color: #fff;
+}
+
+.ranking-item:nth-child(2) .rank-num {
+  background-color: #c0c0c0;
+  color: #fff;
+}
+
+.ranking-item:nth-child(3) .rank-num {
+  background-color: #cd7f32;
+  color: #fff;
+}
+
+.rank-info {
+  flex: 1;
+}
+
+.rank-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.rank-category {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.rank-phone {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.rank-stats {
+  text-align: center;
+  margin-left: 20rpx;
+}
+
+.stat-num {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.stat-num.highlight {
+  color: #1890ff;
+}
+
+.stat-label-small {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.empty-tip {
+  text-align: center;
+  color: #999;
+  padding: 40rpx;
+}
+
+/* 导出按钮 */
+.btn-export {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+}

@@ -1,0 +1,152 @@
+/* pages/favorite-list/favorite-list.wxss */
+/* 容器 */
+.favorite-container {
+  padding: 20rpx;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 列表 */
+.favorite-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+/* 卡片 - 白色背景 + 圆角 */
+.favorite-card {
+  background: #ffffff;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  position: relative; /* 添加这行，让子元素 absolute 定位相对于此卡片 */
+}
+
+/* 左侧主要信息区 */
+.left-section {
+  flex: 1;
+}
+
+/* 标题 - 黑色粗体 */
+.card-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+/* 标签行 - 并排 */
+.tag-row {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+/* 标签 - 浅绿色背景 + 绿色文字 */
+.tag {
+  font-size: 22rpx;
+  color: #07c160;
+  background: #e8f9ee;
+  padding: 6rpx 14rpx;
+  border-radius: 6rpx;
+  display: inline-block;
+}
+
+/* 描述 - 灰色 */
+.card-desc {
+  font-size: 26rpx;
+  color: #666666;
+  line-height: 1.6;
+}
+
+/* 右上角收藏区 */
+.favorite-section {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+}
+
+/* 收藏盒子 - 淡粉色背景 */
+.favorite-box {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  background: #fff0f0;
+  padding: 8rpx 14rpx;
+  border-radius: 8rpx;
+}
+
+/* 心形图标 - 红色 */
+.heart-icon {
+  font-size: 24rpx;
+  color: #ff4757;
+}
+
+/* 已收藏文字 - 红色 */
+.favorite-text {
+  font-size: 22rpx;
+  color: #ff4757;
+}
+
+/* 分割线 - 极浅虚线 */
+.divider {
+  height: 1rpx;
+  background: #f0f0f0;
+  margin: 20rpx 0;
+}
+
+/* 底部地址区 */
+.bottom-section {
+  display: flex;
+  align-items: center;
+}
+
+/* 定位图标 - 粉色 */
+.location-icon {
+  font-size: 24rpx;
+  color: #ff6b8a;
+  margin-right: 6rpx;
+}
+
+/* 地址文字 - 灰色 */
+.location-text {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+  color: #999999;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  color: #cccccc;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+}
+
+/* 加载中 */
+.loading {
+  text-align: center;
+  padding: 24rpx 0;
+  color: #999999;
+  font-size: 26rpx;
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: 24rpx 0;
+  color: #07c160;
+  font-size: 26rpx;
+}

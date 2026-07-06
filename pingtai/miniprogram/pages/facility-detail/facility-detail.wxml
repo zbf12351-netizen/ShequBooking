@@ -1,0 +1,96 @@
+<!--pages/facility-detail/facility-detail.wxml-->
+<view class="detail-container">
+  <!-- 设施图片 -->
+  <view class="facility-header-image" wx:if="{{facility.image_url}}">
+    <image src="{{facility.image_url}}" mode="aspectFill" />
+  </view>
+  <view class="facility-header-placeholder" wx:else>
+    <text class="facility-category-large">{{facility.category}}</text>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="info-card">
+    <view class="facility-header">
+      <text class="facility-name">{{facility.name}}</text>
+      <text class="facility-status {{facility.status === 1 ? 'available' : 'unavailable'}}">
+        {{facility.status === 1 ? '可预约' : '已停用'}}
+      </text>
+    </view>
+    
+    <view class="facility-meta">
+      <text class="tag tag-info">{{facility.category}}</text>
+      <text class="rating">⭐ {{facility.rating || '暂无评分'}}</text>
+      <text class="booking-count">🔥 预约 {{facility.booking_count}} 次</text>
+      <text class="fav-count">⭐ 收藏 {{facility.favorite_count || 0}} 次</text>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="info-row">
+      <text class="info-label">📍 位置：</text>
+      <text class="info-value">{{facility.location}}</text>
+    </view>
+
+    <view class="info-row">
+      <text class="info-label">👥 容量：</text>
+      <text class="info-value">{{facility.capacity}} 人</text>
+    </view>
+
+    <view class="info-row">
+      <text class="info-label">📝 描述：</text>
+      <text class="info-value">{{facility.description}}</text>
+    </view>
+  </view>
+
+  <!-- 评价列表 -->
+  <view class="reviews-section" wx:if="{{reviews.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">用户评价</text>
+      <text class="section-subtitle">⭐ {{facility.rating || '暂无评分'}}</text>
+    </view>
+    
+    <view class="review-list">
+      <block wx:for="{{reviews}}" wx:key="review_id">
+        <view class="review-item">
+          <view class="review-header">
+            <text class="review-user">{{item.user_name || '匿名用户'}}</text>
+            <text class="review-time">{{item.created_at}}</text>
+          </view>
+          <view class="review-rating">
+            <text wx:for="{{[1,2,3,4,5]}}" wx:for-item="star" wx:key="*this">
+              {{star <= item.rating ? '⭐' : '☆'}}
+            </text>
+          </view>
+          <view class="review-content" wx:if="{{item.content}}">
+            {{item.content}}
+          </view>
+        </view>
+      </block>
+    </view>
+    
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{hasMoreReviews}}" bindtap="loadMoreReviews">
+      <text wx:if="{{!reviewLoading}}">加载更多评价</text>
+      <text wx:else>加载中...</text>
+    </view>
+  </view>
+
+  <!-- 预约按钮 -->
+  <view class="action-bar" wx:if="{{facility.status === 1}}">
+    <!-- 收藏按钮：登录用户显示实时状态 -->
+    <button class="btn-favorite {{isFavorite ? 'btn-favorite-active' : ''}}" 
+            wx:if="{{isLoggedIn}}" 
+            bindtap="toggleFavorite">
+      {{isFavorite ? '★ 已收藏' : '☆ 收藏'}}
+    </button>
+    <!-- 未登录用户显示灰色收藏按钮 -->
+    <button class="btn-favorite btn-favorite-disabled" 
+            wx:else 
+            bindtap="toggleFavorite">
+      ☆ 收藏
+    </button>
+    
+    <button class="btn-booking" bindtap="goToBooking">立即预约</button>
+  </view>
+</view>
+

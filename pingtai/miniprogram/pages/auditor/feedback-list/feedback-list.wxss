@@ -1,0 +1,130 @@
+/* pages/auditor/feedback-list/feedback-list.wxss */
+.feedback-list-container {
+  padding: 20rpx;
+  padding-bottom: 120rpx;
+}
+
+/* 切换标签 */
+.tab-bar {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 8rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #666666;
+  border-radius: 12rpx;
+  transition: all 0.2s;
+}
+
+.tab-item.active {
+  background-color: #4CAF50;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* 反馈卡片 */
+.feedback-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.feedback-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.type {
+  font-size: 26rpx;
+  color: #2196F3;
+  font-weight: 500;
+}
+
+.user {
+  font-size: 26rpx;
+  color: #999999;
+  flex: 1;
+  text-align: right;
+  margin-left: 16rpx;
+}
+
+.status {
+  font-size: 24rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  margin-left: 16rpx;
+}
+
+.status.pending {
+  color: #ff9800;
+  background-color: #fff3e0;
+}
+
+.status.replied, .status.closed {
+  color: #4CAF50;
+  background-color: #e8f5e9;
+}
+
+.content {
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 1.8;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+/* 回复信息 */
+.reply-info {
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 16rpx;
+  margin-top: 16rpx;
+}
+
+.reply-label {
+  font-size: 26rpx;
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+.reply-content {
+  font-size: 26rpx;
+  color: #333333;
+  display: block;
+  margin-top: 8rpx;
+}
+
+.replier-info {
+  font-size: 24rpx;
+  color: #999999;
+  display: block;
+  margin-top: 12rpx;
+}
+
+.btn-reply {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999999;
+}

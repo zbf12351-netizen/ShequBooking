@@ -1,0 +1,33 @@
+<!--pages/edit-profile/edit-profile.wxml-->
+<view class="container">
+  <form bindsubmit="submitForm">
+    <!-- 用户信息展示（只读） -->
+    <view class="info-section">
+      <view class="info-item">
+        <text class="label">手机号</text>
+        <text class="value">{{userInfo.phone}}</text>
+      </view>
+      <view class="info-item">
+        <text class="label">角色</text>
+        <text class="value">{{roleText[userInfo.role]}}</text>
+      </view>
+    </view>
+
+    <!-- 可编辑信息 -->
+    <view class="form-section">
+      <view class="form-group">
+        <text class="label">用户名</text>
+        <input 
+          class="input" 
+          name="username" 
+          placeholder="请输入用户名"
+          value="{{userInfo.username}}"
+        />
+      </view>
+    </view>
+
+    <button class="btn-submit" form-type="submit" loading="{{loading}}">
+      保存修改
+    </button>
+  </form>
+</view>

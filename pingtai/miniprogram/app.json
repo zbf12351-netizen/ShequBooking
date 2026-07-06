@@ -1,0 +1,76 @@
+{
+  "usingComponents": {
+    "custom-tabbar": "/components/custom-tabbar/custom-tabbar"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于签到验证"
+    }
+  },
+  "requiredPrivateInfos": ["getLocation"],
+  "pages": [
+    "pages/home/home",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/change-password/change-password",
+    "pages/edit-profile/edit-profile",
+    "pages/notification-list/notification-list",
+    "pages/notification-detail/notification-detail",
+    "pages/facilities/facilities",
+    "pages/facility-detail/facility-detail",
+    "pages/booking/booking",
+    "pages/booking-list/booking-list",
+    "pages/booking-detail/booking-detail",
+    "pages/review/review",
+    "pages/feedback/feedback",
+    "pages/feedback-list/feedback-list",
+    "pages/favorite-list/favorite-list",
+    "pages/profile/profile",
+    "pages/auditor/audit-list/audit-list",
+    "pages/auditor/audited-list/audited-list",
+    "pages/auditor/feedback-list/feedback-list",
+    "pages/admin/dashboard/dashboard",
+    "pages/admin/users/users",
+    "pages/admin/facilities/facilities",
+    "pages/admin/rules/rules",
+    "pages/admin/logs/logs",
+    "pages/admin/notifications/notifications",
+    "pages/admin/statistics/statistics",
+    "pages/admin/feedbacks/feedbacks",
+    "pages/admin/export/export"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4CAF50",
+    "navigationBarTitleText": "社区设施预订平台",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    "selectedColor": "#4CAF50",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/facilities/facilities",
+        "text": "设施"
+      },
+      {
+        "pagePath": "pages/booking-list/booking-list",
+        "text": "预约"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,44 @@
+<!--pages/notification-list/notification-list.wxml-->
+<view class="notification-container">
+  <!-- 刷新指示器 -->
+  <view class="refresh-indicator" wx:if="{{isRefreshing}}">
+    <text class="refresh-icon">🔄</text>
+    <text>正在刷新...</text>
+  </view>
+
+  <!-- 未读提示 -->
+  <view class="unread-tip" wx:if="{{unreadCount > 0 && !isRefreshing}}" bindtap="markAllRead">
+    <text>有 {{unreadCount}} 条未读消息</text>
+    <text class="mark-all">全部已读 ></text>
+  </view>
+
+  <!-- 通知列表 -->
+  <view class="notification-list">
+    <view 
+      class="notification-item {{item.is_read ? 'read' : 'unread'}}"
+      wx:for="{{notifications}}"
+      wx:key="notification_id"
+      data-id="{{item.notification_id}}"
+      bindtap="goToDetail"
+    >
+      <view class="item-header">
+        <view class="type-badge type-{{item.type}}">{{typeNames[item.type]}}</view>
+        <text class="time">{{item.created_at}}</text>
+      </view>
+      <view class="item-title">{{item.title}}</view>
+      <view class="item-content">{{item.content}}</view>
+      <view class="unread-dot" wx:if="{{!item.is_read}}"></view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">
+    <text>{{loading ? '加载中...' : '加载更多'}}</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{notifications.length === 0 && !loading}}">
+    <text class="empty-icon">🔔</text>
+    <text class="empty-text">暂无消息通知</text>
+  </view>
+</view>

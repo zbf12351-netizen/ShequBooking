@@ -1,0 +1,128 @@
+/* pages/booking/booking.wxss */
+.booking-container {
+  padding: 20rpx;
+  padding-bottom: 140rpx;
+}
+
+.form-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.form-item {
+  margin-bottom: 32rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #333333;
+  margin-bottom: 16rpx;
+  display: block;
+  font-weight: 500;
+}
+
+.picker-value {
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.form-textarea {
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  min-height: 200rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.recommend-section {
+  background-color: #f0f8ff;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 32rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+}
+
+.time-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.time-item {
+  background-color: #ffffff;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2rpx solid transparent;
+}
+
+.time-item.active {
+  border-color: #4CAF50;
+  background-color: #e8f5e9;
+}
+
+.time-text {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.time-score {
+  font-size: 24rpx;
+  color: #2196F3;
+}
+
+.btn-refresh {
+  background-color: #2196F3;
+  color: #ffffff;
+  border: none;
+}
+
+.action-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding: 20rpx 32rpx;
+  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-save {
+  flex: 1;
+  background-color: #ffffff;
+  color: #4CAF50;
+  border: 2rpx solid #4CAF50;
+  border-radius: 12rpx;
+  padding: 28rpx;
+  font-size: 32rpx;
+}
+
+.btn-submit {
+  flex: 1;
+  background-color: #4CAF50;
+  color: #ffffff;
+  border-radius: 12rpx;
+  padding: 28rpx;
+  font-size: 32rpx;
+  border: none;
+}
+

@@ -1,0 +1,112 @@
+<!--pages/booking-list/booking-list.wxml-->
+<custom-tabbar active="{{2}}" tabs="{{tabBarConfig}}" bind:change="onTabChange"></custom-tabbar>
+<view class="booking-list-container">
+  <!-- 状态筛选 -->
+  <scroll-view class="status-tabs" scroll-x>
+    <view 
+      class="tab-item {{activeStatus === '' ? 'active' : ''}}" 
+      bindtap="onStatusChange"
+      data-status=""
+    >
+      全部
+    </view>
+    <view 
+      class="tab-item {{activeStatus === 'draft' ? 'active' : ''}}" 
+      bindtap="onStatusChange"
+      data-status="draft"
+    >
+      待提交
+    </view>
+    <view 
+      class="tab-item {{activeStatus === 'pending' ? 'active' : ''}}" 
+      bindtap="onStatusChange"
+      data-status="pending"
+    >
+      待审核
+    </view>
+    <view 
+      class="tab-item {{activeStatus === 'approved' ? 'active' : ''}}" 
+      bindtap="onStatusChange"
+      data-status="approved"
+    >
+      已通过
+    </view>
+    <view 
+      class="tab-item {{activeStatus === 'completed' ? 'active' : ''}}" 
+      bindtap="onStatusChange"
+      data-status="completed"
+    >
+      已完成
+    </view>
+    <view 
+      class="tab-item {{activeStatus === 'cancelled' ? 'active' : ''}}" 
+      bindtap="onStatusChange"
+      data-status="cancelled"
+    >
+      已取消
+    </view>
+  </scroll-view>
+
+  <!-- 预约列表 -->
+  <view class="bookings-list">
+    <view class="booking-card" wx:for="{{bookings}}" wx:key="booking_id">
+      <view class="booking-header">
+        <text class="facility-name">{{item.facility_name}}</text>
+        <text class="status-tag tag-{{item.status}}">{{statusText[item.status]}}</text>
+      </view>
+      
+      <view class="booking-info">
+        <text class="info-item">📅 {{item.booking_date}} {{item.start_time}}-{{item.end_time}}</text>
+        <text class="info-item" wx:if="{{item.purpose}}">📝 {{item.purpose}}</text>
+        <text class="info-item" wx:if="{{item.audit_comment}}">💬 {{item.audit_comment}}</text>
+      </view>
+
+      <view class="booking-actions">
+        <button 
+          class="action-btn" 
+          size="mini" 
+          bindtap="viewDetail" 
+          data-id="{{item.booking_id}}"
+        >
+          查看详情
+        </button>
+        <button 
+          class="action-btn primary" 
+          size="mini" 
+          bindtap="submitBooking" 
+          data-id="{{item.booking_id}}"
+          wx:if="{{item.status === 'draft'}}"
+        >
+          提交审核
+        </button>
+        <button 
+          class="action-btn danger" 
+          size="mini" 
+          bindtap="cancelBooking" 
+          data-id="{{item.booking_id}}"
+          wx:if="{{item.status === 'draft' || item.status === 'pending' || item.status === 'approved'}}"
+        >
+          取消预约
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{bookings.length === 0 && !loading}}">
+    <text class="empty-icon">📭</text>
+    <text class="empty-text">暂无预约记录</text>
+    <button class="btn-create" size="mini" bindtap="goToBooking">立即预约</button>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 新建预约按钮 -->
+  <view class="fab" bindtap="goToBooking">
+    <text>+</text>
+  </view>
+</view>
+

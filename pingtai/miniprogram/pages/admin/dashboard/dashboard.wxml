@@ -1,0 +1,61 @@
+<!--pages/admin/dashboard/dashboard.wxml-->
+<view class="dashboard-container">
+  <!-- 统计数据 -->
+  <view class="stats-grid">
+    <view class="stat-card">
+      <text class="stat-value">{{statistics.users.total}}</text>
+      <text class="stat-label">总用户数</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-value">{{statistics.facilities.total}}</text>
+      <text class="stat-label">设施数量</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-value">{{statistics.bookings.total}}</text>
+      <text class="stat-label">总预约数</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-value">{{statistics.bookings.pending}}</text>
+      <text class="stat-label">待审核</text>
+    </view>
+  </view>
+
+  <!-- 管理菜单 -->
+  <view class="menu-grid">
+    <view class="menu-item" bindtap="goToUsers">
+      <text class="menu-icon">👥</text>
+      <text class="menu-text">用户管理</text>
+    </view>
+    <view class="menu-item" bindtap="goToFacilities">
+      <text class="menu-icon">🏢</text>
+      <text class="menu-text">设施管理</text>
+    </view>
+    <view class="menu-item" bindtap="goToRules">
+      <text class="menu-icon">📋</text>
+      <text class="menu-text">预约规则</text>
+    </view>
+    <view class="menu-item" bindtap="goToFeedbacks">
+      <text class="menu-icon">💬</text>
+      <text class="menu-text">所有反馈</text>
+    </view>
+    <view class="menu-item" bindtap="goToLogs">
+      <text class="menu-icon">📝</text>
+      <text class="menu-text">操作日志</text>
+    </view>
+    <view class="menu-item" bindtap="goToNotifications">
+      <text class="menu-icon">📢</text>
+      <text class="menu-text">发布通知</text>
+    </view>
+    <view class="menu-item" bindtap="goToStatistics">
+      <text class="menu-icon">📊</text>
+      <text class="menu-text">数据统计</text>
+    </view>
+    <view class="menu-item" bindtap="goToExport">
+      <text class="menu-icon">📤</text>
+      <text class="menu-text">导出报表</text>
+    </view>
+  </view>
+
+  <button class="btn-back" bindtap="handleLogout">退出登录</button>
+</view>
+
